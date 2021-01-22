@@ -1,0 +1,41 @@
+API List.
+
+1. Signup screen:
+- Signup API (using email and password)
+- Signup API (using linkedin)
+
+2. Signin screen:
+- Signin API (using email and password)
+- Signin API (using linkedin)
+
+3. Reset password screen:
+- Reset password API (using email)
+- Update new password (using code and new password)
+
+4. Create or update profile screen:
+- Create or update profile API
+- Upload image API (if need)
+
+5. Build sailebot feature:
+- Get questions and answers API (if need or using json file)
+- Build sailebot API
+- Launch sailebot was setup API (or Get sailebot was setup API)
+
+6. Home screen:
+- Get delivered API
+- Get delivering API
+
+7. Swipe contact screen:
+- Get contact to swipe API
+- Add contact to campaign API
+- Build sailebot with 3 contacts was added API
+
+8. Setting screen:
+- Launch sailebot was setup API (or Get sailebot was setup API)
+- Notify sailebot support API
+
+9. Notify screen:
+- Get notification API
+
+10. Change password screen:
+- Change password API

@@ -1,0 +1,15 @@
+Question {
+description
+question
+anwser: [Answer]
+subQuestion; [Question]
+isSkip
+isOptional
+}
+
+Answer {
+type (selection, multiple selection, input, mutipleinput, pickerSelection)
+sugestionAnser (for selection, multiple selection)
+placeHolder (for input)
+userAnswer
+}
