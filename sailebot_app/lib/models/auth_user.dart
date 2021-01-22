@@ -1,107 +1,57 @@
 import 'package:flutter/foundation.dart';
-import 'package:sailebot_app/frameworks/linked_with_login/data_model/email_response.dart';
-import 'package:sailebot_app/frameworks/linked_with_login/data_model/profile_response.dart';
 
 class AuthUser {
-  static const idKey = 'id';
-  static const firstNameKey = 'firstname';
-  static const lastNameKey = 'lastname';
-  static const emailKey = 'email';
-  static const passwordKey = 'password';
-  static const genderKey = 'gender';
-  static const industryKey = 'industry';
-  static const productsServicesKey = 'products_services';
-  static const avatarKey = 'avatar';
-
-  final String id;
-  final String firstName;
-  final String lastName;
+  final String idToken;
   final String email;
-  final String password;
-  final String gender;
-  final String industry;
-  final String productsServices;
-  final String avatar;
+  final String refreshToken;
+  final double expiresIn;
+  final String localId;
+  final String displayName;
 
   AuthUser._internal(
-    this.id,
+    this.idToken,
     this.email,
-    this.firstName,
-    this.lastName,
-    this.password,
-    this.gender,
-    this.industry,
-    this.productsServices,
-    this.avatar,
+    this.refreshToken,
+    this.expiresIn,
+    this.localId,
+    this.displayName,
   );
 
   factory AuthUser.fromJson({@required Map<String, dynamic> value}) {
     return AuthUser._internal(
-        value[idKey],
-        value[emailKey],
-        value[firstNameKey],
-        value[lastNameKey],
-        value[passwordKey],
-        value[genderKey],
-        value[industryKey],
-        value[productsServicesKey],
-        '');
-  }
-
-  factory AuthUser.initLinkedin(LinkedInEmail email, LinkedInProfile profile) {
-    String emailString = email.elements.first.elementHandle.emailAddress ?? '';
-    String firstName = profile.firstName.localized.enUs ?? '';
-    String lastName = profile.lastName.localized.enUs ?? '';
-    String avatar = profile.profilePicture.profilePictureDisplayImage.elements
-        .first.identifiers.first.identifier ?? '';
-    return AuthUser._internal(
-      '',
-      emailString,
-      firstName,
-      lastName,
-      '',
-      '',
-      '',
-      '',
-      avatar,
+      value['idToken'],
+      value['email'],
+      value['refreshToken'],
+      double.parse(value['expiresIn']),
+      value['localId'],
+      value['displayName'] ?? '',
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      idKey: this.id,
-      firstNameKey: this.firstName,
-      lastNameKey: this.lastName,
-      emailKey: this.email,
-      passwordKey: this.password,
-      genderKey: this.gender,
-      industryKey: this.industry,
-      productsServicesKey: this.productsServices,
-      avatarKey: this.avatar,
+      'idToken': this.idToken,
+      'email': this.email,
+      'refreshToken': this.refreshToken,
+      'expiresIn': '${this.expiresIn}',
+      'localId': this.localId,
+      'displayName': this.displayName,
     };
   }
 
   AuthUser copyWith({
-    String id,
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String gender,
-    String industry,
-    String productsServices,
-    String avatar,
+    String idToken,
+    double expiresIn,
+    String refreshToken,
+    String displayName,
   }) {
     return AuthUser._internal(
-      id ?? this.id,
-      firstName ?? this.firstName,
-      lastName ?? this.lastName,
-      email ?? this.email,
-      password ?? this.password,
-      gender ?? this.gender,
-      industry ?? this.industry,
-      productsServices ?? this.productsServices,
-      avatar ?? this.avatar,
+      idToken ?? this.idToken,
+      this.email,
+      refreshToken ?? this.refreshToken,
+      expiresIn ?? this.expiresIn,
+      this.localId,
+      displayName ?? '',
     );
   }
 }

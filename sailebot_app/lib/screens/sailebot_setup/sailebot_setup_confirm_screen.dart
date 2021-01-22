@@ -29,7 +29,7 @@ class _SaileBotSetupConfirmScreen extends State<SaileBotSetupConfirmScreen> {
 
   @override
   void initState() {
-    Utils.homeStatusBar();
+    Utils.blackStatusBar();
     super.initState();
   }
 
@@ -55,7 +55,7 @@ class _SaileBotSetupConfirmScreen extends State<SaileBotSetupConfirmScreen> {
             itemSelected: MenuEnum.home,
             goBackHandler: () {
               Future.delayed(Duration(milliseconds: 100), () {
-                Utils.homeStatusBar();
+                Utils.blackStatusBar();
               });
             },
           ),
@@ -102,7 +102,7 @@ class _SaileBotSetupConfirmScreen extends State<SaileBotSetupConfirmScreen> {
               bottom: 25.0,
             ),
             child: Text(
-              'Sailebots generate actionable revenue opportunities, with approved prospects, using AI, automation, and the personality traits of human sales executives. Sailebots are paid for performance.',
+              'Sailebots generate actionable revenue opportunities, with approved prospects, using patent-pending AI and the personality traits of human sales executives like you.\nSailebots are paid for performance',
               style: context.theme.textTheme.headline5.copyWith(
                 color: Colors.grey[900],
                 fontSize: 19,
@@ -259,7 +259,7 @@ class _SaileBotSetupConfirmScreen extends State<SaileBotSetupConfirmScreen> {
               'assets/images/bg_launch_saile_bot.png',
               fit: BoxFit.fitWidth,
               width: _widthImage,
-              height: 0.6393442623 * _widthImage,
+              height: 0.6590163934 * _widthImage,
             ),
           ),
           SizedBox(height: 25),

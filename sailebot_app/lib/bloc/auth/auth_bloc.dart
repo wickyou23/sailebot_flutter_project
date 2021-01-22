@@ -18,8 +18,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield* _mapToAuthSignupEvent(event);
     } else if (event is AuthSigninEvent) {
       yield* _mapToAuthSigninEvent(event);
-    } else if (event is AuthLinkedinEvent) {
-      yield* _mapToAuthLinkedinEvent(event);
     }
   }
 
@@ -66,18 +64,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await repo.setCurrentUser(res.responseData);
       yield AuthSigninSuccessState();
       yield AuthReadyState(res.responseData);
-    } else if (res is ResponseFailedState) {
-      yield AuthSigninFailedState(failedState: res);
     }
-  }
-
-  Stream<AuthState> _mapToAuthLinkedinEvent(AuthLinkedinEvent event) async* {
-    yield AuthProcessingState();
-    ResponseState res = await AuthMiddleware().signinWithLinkedin(event.context);
-    if (res is ResponseSuccessState<AuthUser>) {
-      await repo.setCurrentUser(res.responseData);
-      yield AuthSigninLinkedinSuccessState(res.responseData);
-    } else if (res is ResponseFailedState) {
+    else if (res is ResponseFailedState) {
       yield AuthSigninFailedState(failedState: res);
     }
   }

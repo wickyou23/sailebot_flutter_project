@@ -27,7 +27,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     super.initState();
   }
 
@@ -39,7 +39,7 @@ class _SettingScreenState extends State<SettingScreen> {
         children: <Widget>[
           CustomNavigationBar(
             tintColor: Colors.white,
-            backgroundColor: ColorExt.colorWithHex(0x098EF5),
+            bgImage: 'assets/images/bg_default_navigation_bar.png',
             navTitle: 'Settings',
           ),
           Container(

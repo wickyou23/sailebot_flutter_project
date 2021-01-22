@@ -5,6 +5,7 @@ import 'package:sailebot_app/screens/sailebot/sailebot_setting_screen.dart';
 import 'package:sailebot_app/screens/sailebot_setup/resume_questionaire_screen.dart';
 import 'package:sailebot_app/screens/sailebot_setup/sailebot_setup_confirm_screen.dart';
 import 'package:sailebot_app/screens/sailebot_swipe/sailebot_swipe_intro_screen.dart';
+import 'package:sailebot_app/screens/sailebot_swipe/sailebot_swipe_screen.dart';
 import 'package:sailebot_app/screens/settings/settings_screen.dart';
 import 'package:sailebot_app/screens/support/support_screen.dart';
 import 'package:sailebot_app/screens/users/proffile_detail_screen.dart';
@@ -309,10 +310,17 @@ extension MenuEnumExt on MenuEnum {
 
         break;
       case MenuEnum.saileSwipe:
-        context.navigator.pushNamed(
-          SaileBotSwipeIntroScreen.routeName,
-          arguments: goBackHandler,
-        );
+        if (LocalStoreService().swipeNumberStack <= 10) {
+          context.navigator.pushNamed(
+            SaileBotSwipeIntroScreen.routeName,
+            arguments: goBackHandler,
+          );
+        } else {
+          context.navigator.pushNamed(
+            SaileBotSwipeScreen.routeName,
+            arguments: goBackHandler,
+          );
+        }
 
         break;
       case MenuEnum.setting:

@@ -12,7 +12,7 @@ class NotificationDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Utils.homeStatusBar();
+    Utils.blackStatusBar();
     NotiObject _crNoti = context.routeArg as NotiObject;
 
     return Scaffold(

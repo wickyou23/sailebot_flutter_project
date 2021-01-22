@@ -12,7 +12,7 @@ class TOSSettingScreen extends StatelessWidget {
         children: <Widget>[
           CustomNavigationBar(
             navTitle: 'Term of Service',
-            backgroundColor: ColorExt.colorWithHex(0x098EF5),
+            bgImage: 'assets/images/bg_default_navigation_bar.png',
           ),
           Container(
             padding: EdgeInsets.only(

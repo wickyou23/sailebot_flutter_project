@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'extension.dart';
 
 class Utils {
-  static homeStatusBar() {
+  static blackStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
         statusBarColor: ColorExt.colorWithHex(0xf0f0f0),
@@ -17,7 +17,7 @@ class Utils {
     );
   }
 
-  static authAppStatusBar() {
+  static whiteStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Platform.isIOS ? Colors.white : Colors.transparent,

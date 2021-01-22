@@ -27,17 +27,16 @@ class _ProductQuestionScreenState extends State<ProductQuestionScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     final qService = QuestionaireService();
     if (qService.isPendingProgress) {
-      _currentQuestion =
-          qService.currentSetup()[_myEnum] ?? 0;
+      _currentQuestion = qService.currentSetup()[_myEnum] ?? 0;
     }
 
     KeyboardVisibility.onChange.listen((event) {
       if (!event) {
         Future.delayed(Duration(milliseconds: 100), () {
-          Utils.authAppStatusBar();
+          Utils.whiteStatusBar();
         });
       }
     });
@@ -106,7 +105,11 @@ class _ProductQuestionScreenState extends State<ProductQuestionScreen> {
             });
 
             QuestionaireService().isShowBannerSaved = true;
-            context.navigator.pushReplacementNamed(HomeScreen.routeName);
+            // context.navigator.pushReplacementNamed(HomeScreen.routeName);
+            context.navigator.pushNamedAndRemoveUntil(
+              HomeScreen.routeName,
+              (route) => false,
+            );
           },
           nextOnPressed: () {
             _currentQuestion += 1;

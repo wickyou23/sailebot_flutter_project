@@ -46,14 +46,6 @@ class AuthSignupFailedState extends AuthState {
 
 class AuthSigninSuccessState extends AuthState {}
 
-class AuthSigninLinkedinSuccessState extends AuthReadyState {
-
-  AuthSigninLinkedinSuccessState(AuthUser crUser) : super(crUser);
-
-  @override
-  String toString() => 'AuthSigninLinkedinSuccessState { crUser: $crUser }';
-}
-
 class AuthSigninFailedState extends AuthState {
   final ResponseFailedState failedState;
 
@@ -65,3 +57,4 @@ class AuthSigninFailedState extends AuthState {
   @override
   String toString() => 'AuthSignupFailedState { failed: $failedState }';
 }
+

@@ -16,7 +16,7 @@ class ProfileDetailScreen extends StatefulWidget {
 class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     super.initState();
   }
 
@@ -25,7 +25,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     final _ratioTopImage = 0.65;
     final _heighTopImage = context.media.size.width * _ratioTopImage;
     final _topBgImage = -50.0;
-    final _widthAvatar = 140.0;
+    final _widthAvatar = 145.0;
 
     return Scaffold(
       body: Stack(
@@ -42,14 +42,18 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 ),
               ),
               Positioned(
-                top: ((_heighTopImage + _topBgImage) / 2) + 20,
+                top: ((_heighTopImage + _topBgImage) / 2) + 10,
                 left: (context.media.size.width / 2) - (_widthAvatar / 2),
                 child: Container(
                   height: _widthAvatar,
                   width: _widthAvatar,
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(70),
-                    boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 8.0)],
+                    borderRadius: BorderRadius.circular(_widthAvatar / 2),
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/bg_avatar_image.png'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   child: Image.asset(
                     'assets/images/default_avatar.png',

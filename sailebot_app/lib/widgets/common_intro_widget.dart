@@ -31,7 +31,7 @@ class CommonIntroWidget extends StatelessWidget {
           Container(
             child: Image.asset(
               this.assetImage,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
               width: this.widthImage,
               height: this.ratioImage * this.widthImage,
             ),

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
@@ -35,10 +34,4 @@ class AuthSigninEvent extends AuthEvent {
 
   @override
   List<Object> get props => [email, password];
-}
-
-class AuthLinkedinEvent extends AuthEvent {
-  final BuildContext context;
-  
-  AuthLinkedinEvent(this.context);
 }

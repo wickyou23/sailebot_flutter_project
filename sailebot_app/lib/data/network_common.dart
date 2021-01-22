@@ -48,13 +48,13 @@ class NetworkCommon {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          // var user = await AuthRepository().getCurrentUser();
+          var user = await AuthRepository().getCurrentUser();
           Map<String, dynamic> preQueryParams = options.queryParameters;
-          // preQueryParams.update(
-          //   'auth',
-          //   (_) => user.idToken,
-          //   ifAbsent: () => user.idToken,
-          // );
+          preQueryParams.update(
+            'auth',
+            (_) => user.idToken,
+            ifAbsent: () => user.idToken,
+          );
           options.queryParameters = preQueryParams;
 
           print("PreReq:${options.method},${options.baseUrl}${options.path}\n");
@@ -73,13 +73,13 @@ class NetworkCommon {
           if (response.statusCode == 401) {
             var refreshResponse = await AuthMiddleware().refreshToken();
             if (refreshResponse is ResponseSuccessState<AuthUser>) {
-              // var newUser = refreshResponse.responseData;
+              var newUser = refreshResponse.responseData;
               RequestOptions ro = response.request;
-              // ro.queryParameters.update(
-              //   'auth',
-              //   (value) => newUser.idToken,
-              //   ifAbsent: () => newUser.idToken,
-              // );
+              ro.queryParameters.update(
+                'auth',
+                (value) => newUser.idToken,
+                ifAbsent: () => newUser.idToken,
+              );
 
               var tryDio = Dio();
               return await tryDio.request(ro.path, options: ro);

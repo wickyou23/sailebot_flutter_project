@@ -29,7 +29,7 @@ class _ProspectsQuestionScreenState extends State<ProspectsQuestionScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     final qService = QuestionaireService();
     if (qService.isPendingProgress) {
       _currentQuestion =
@@ -39,7 +39,7 @@ class _ProspectsQuestionScreenState extends State<ProspectsQuestionScreen> {
     KeyboardVisibility.onChange.listen((event) {
       if (!event) {
         Future.delayed(Duration(milliseconds: 100), () {
-          Utils.authAppStatusBar();
+          Utils.whiteStatusBar();
         });
       }
     });
@@ -128,7 +128,11 @@ class _ProspectsQuestionScreenState extends State<ProspectsQuestionScreen> {
             });
 
             QuestionaireService().isShowBannerSaved = true;
-            context.navigator.pushReplacementNamed(HomeScreen.routeName);
+            // context.navigator.pushReplacementNamed(HomeScreen.routeName);
+            context.navigator.pushNamedAndRemoveUntil(
+              HomeScreen.routeName,
+              (route) => false,
+            );
           },
           nextOnPressed: () {
             _currentQuestion += 1;

@@ -19,7 +19,7 @@ Future<Null> main() async {
   // ]);
 
   WidgetsFlutterBinding.ensureInitialized();
-  Utils.authAppStatusBar();
+  Utils.whiteStatusBar();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   await LocalStoreService().config();
   runApp(MyApp());

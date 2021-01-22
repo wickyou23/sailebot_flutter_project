@@ -74,8 +74,13 @@ class ConfirmationSaveQuestionScreen extends StatelessWidget {
               ),
               color: ColorExt.colorWithHex(0x098EF5),
               onPressed: () {
-                QuestionaireService().isShowBannerSaved = true;
-                context.navigator.pushReplacementNamed(HomeScreen.routeName);
+                // QuestionaireService().isShowBannerSaved = true;
+                // context.navigator.popUntil((route) => false);
+                // context.navigator.pushNamedAndRemoveUntil(
+                //   HomeScreen.routeName,
+                //   (route) => false,
+                // );
+                // context.navigator.pushReplacementNamed(HomeScreen.routeName);
                 // context.navigator.popUntil((route) {
                 //   bool isPop = false;
                 //   if (route.settings.name == HomeScreen.routeName) {

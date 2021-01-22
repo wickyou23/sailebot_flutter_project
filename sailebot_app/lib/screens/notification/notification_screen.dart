@@ -164,7 +164,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         )
                             .then((value) {
                           Future.delayed(Duration(milliseconds: 200), () {
-                            Utils.authAppStatusBar();
+                            Utils.whiteStatusBar();
                           });
                         });
                       },

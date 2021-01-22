@@ -22,6 +22,8 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
     with SingleTickerProviderStateMixin {
   final _maxStackInADay = 10;
   final _ratioTopImage = 0.65;
+
+  var _maxImage = 150.0;
   int _numberSwipeRight = 0;
   int _numberStack = 1;
   DateTime _swipeDate;
@@ -36,7 +38,7 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     _setupTheFirstTime();
     super.initState();
   }
@@ -45,6 +47,11 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
   void dispose() {
     super.dispose();
     debugPrint('${SaileBotSwipeScreen.routeName} dispose ===========');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   void _setupTheFirstTime() {
@@ -79,6 +86,7 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
   @override
   Widget build(BuildContext context) {
     final _heighTopImage = context.media.size.width * _ratioTopImage;
+    _maxImage = (context.isSmallDevice) ? 150 : 180;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -111,18 +119,15 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
                 ),
               ),
             _buildSwipe(),
-            CustomNavigationBar(
-              tintColor: (_numberStack == _maxStackInADay + 1)
-                  ? Colors.black
-                  : Colors.white,
-              navTitle: (_numberStack == _maxStackInADay + 1)
-                  ? ''
-                  : '$_numberStack/$_maxStackInADay',
-            ),
+            if (_numberStack < _maxStackInADay + 1)
+              CustomNavigationBar(
+                tintColor: Colors.white,
+                navTitle: '$_numberStack/$_maxStackInADay',
+              ),
             if (!_onSwipe && _numberStack < _maxStackInADay + 1)
               Positioned(
-                top: _heighTopImage,
-                left: 40,
+                top: _heighTopImage - 20,
+                left: 10,
                 child: CupertinoButton(
                   child: Image.asset(
                     'assets/images/ic_double_arrow_left.png',
@@ -137,8 +142,8 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
               ),
             if (!_onSwipe && _numberStack < _maxStackInADay + 1)
               Positioned(
-                top: _heighTopImage,
-                right: 40,
+                top: _heighTopImage - 20,
+                right: 10,
                 child: CupertinoButton(
                   child: Image.asset(
                     'assets/images/ic_double_arrow_right.png',
@@ -178,14 +183,18 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
             ),
           ),
           Positioned(
-            top: _heighTopImage / 2 + 30,
-            left: (context.media.size.width / 2) - 75,
+            top: _heighTopImage / 2 + 16,
+            left: (context.media.size.width / 2) - (_maxImage / 2),
             child: Container(
-              height: 150,
-              width: 150,
+              height: _maxImage,
+              width: _maxImage,
+              padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(70),
-                boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 8.0)],
+                borderRadius: BorderRadius.circular(_maxImage / 2),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/bg_avatar_image.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Image.asset(
                 'assets/images/default_avatar.png',
@@ -194,9 +203,12 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
             ),
           ),
           Positioned(
-            top: _heighTopImage + 75,
+            top: _heighTopImage +
+                (_maxImage / 2) -
+                ((context.isSmallDevice) ? 20 : 0),
             width: context.media.size.width,
-            height: context.media.size.height - (_heighTopImage + 75),
+            height:
+                context.media.size.height - (_heighTopImage + (_maxImage / 2)),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
@@ -277,7 +289,7 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
 
   Widget _buildSwipe() {
     if (_numberStack == _maxStackInADay + 1) {
-      Utils.homeStatusBar();
+      Utils.blackStatusBar();
       return CommonIntroWidget(
         assetImage: "assets/images/bg_top_swipe_limit.png",
         widthImage: 260,
@@ -298,6 +310,10 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
             }
 
             return isPop;
+          });
+
+          Future.delayed(Duration(milliseconds: 100), () {
+            Utils.whiteStatusBar();
           });
         },
       );
@@ -370,7 +386,7 @@ class _SaileBotSwipeScreenState extends State<SaileBotSwipeScreen>
                 .pushNamed(SaileBotSwipeBuildScreen.routeName)
                 .then(
               (value) {
-                Utils.authAppStatusBar();
+                Utils.whiteStatusBar();
               },
             );
           }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
@@ -18,6 +20,7 @@ class BannerWidgetState extends State<BannerWidget>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> _animation;
+  Timer _autoHideTimer;
   bool isShowing = false;
 
   @override
@@ -36,6 +39,7 @@ class BannerWidgetState extends State<BannerWidget>
 
   @override
   void dispose() {
+    _autoHideTimer?.cancel();
     _animationController.dispose();
     super.dispose();
   }
@@ -108,7 +112,8 @@ class BannerWidgetState extends State<BannerWidget>
     _animationController.animateWith(simulation);
     this.isShowing = true;
     if (hideInDuration != null) {
-      Future.delayed(hideInDuration, () {
+      _autoHideTimer?.cancel();
+      _autoHideTimer = Timer(hideInDuration, () {
         if (_animationController.status == AnimationStatus.completed) {
           _animationController.reverse();
         }

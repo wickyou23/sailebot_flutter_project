@@ -7,7 +7,6 @@ import 'package:sailebot_app/services/local_store_service.dart';
 import 'package:sailebot_app/utils/extension.dart';
 import 'package:sailebot_app/widgets/custom_navigation_bar.dart';
 import 'package:sailebot_app/widgets/custom_textformfield.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   static final routeName = '/UpdateProfileScreen';
@@ -32,7 +31,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final _phoneFC = FocusNode();
   final _genderFC = FocusNode();
 
-  final _maxImage = 140.0;
+  final _maxImage = 145.0;
   final _ratioTopImage = 0.4453703704;
   final _imagePicker = ImagePicker();
   final _listGender = const ['Male', 'Female'];
@@ -41,6 +40,26 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   double _heighTopImage;
   File _image;
   bool _isShowNaviBar = false;
+
+  @override
+  void dispose() {
+    _firstNameFC.dispose();
+    _lastNameFC.dispose();
+    _productFC.dispose();
+    _emailFC.dispose();
+    _phoneFC.dispose();
+    _genderFC.dispose();
+
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _genderController.dispose();
+    _industryController.dispose();
+    _productController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    
+    super.dispose();
+  }
 
   @override
   void didChangeDependencies() {
@@ -64,7 +83,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: _heighTopImage + 70,
+                    height: _heighTopImage + (_maxImage / 2),
                     child: Stack(
                       children: <Widget>[
                         Positioned(
@@ -77,17 +96,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ),
                         ),
                         Positioned(
-                          top: _heighTopImage / 2 + 10,
-                          left: (context.media.size.width / 2) - 70,
+                          top: _heighTopImage / 2,
+                          left:
+                              (context.media.size.width / 2) - (_maxImage / 2),
                           child: Container(
-                            height: 140,
-                            width: 140,
+                            height: _maxImage,
+                            width: _maxImage,
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(_maxImage / 2),
-                              boxShadow: [
-                                BoxShadow(color: Colors.grey, blurRadius: 8.0)
-                              ],
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/bg_avatar_image.png'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                             child: GestureDetector(
                               child: (_image == null)

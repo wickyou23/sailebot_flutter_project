@@ -5,8 +5,9 @@ import 'package:sailebot_app/enum/answer_enum.dart';
 import 'package:sailebot_app/enum/text_field_enum.dart';
 import 'package:sailebot_app/models/answer_object.dart';
 import 'package:sailebot_app/models/question_object.dart';
+import 'package:sailebot_app/services/questionaire_service.dart';
 import 'package:sailebot_app/utils/extension.dart';
-
+import 'package:sailebot_app/widgets/search_box_widget.dart';
 import 'custom_textformfield.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -48,6 +49,17 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   void dispose() {
     debugPrint('QuestionWidget ${this.q.id} dispose======================');
+    _textFC.forEach((key, value) {
+      value.dispose();
+    });
+
+    _textEditing.forEach((key, value) {
+      value.dispose();
+    });
+
+    _textEditing = {};
+    _textFC = {};
+
     super.dispose();
   }
 
@@ -216,12 +228,13 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     }
 
     TextEditingController controller;
-    FocusNode forcus;
+    FocusNode focus;
     if (aw.type == AnswerEnum.selectType ||
         aw.type == AnswerEnum.inputType ||
-        aw.type == AnswerEnum.multipleInputType) {
+        aw.type == AnswerEnum.multipleInputType ||
+        aw.type == AnswerEnum.industrySearchBox) {
       controller = TextEditingController(text: aw.tmpUserAnswer);
-      forcus = FocusNode();
+      focus = FocusNode();
       if (_textEditing[aw.id] != null) {
         controller = _textEditing[aw.id];
       } else {
@@ -229,9 +242,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       }
 
       if (_textFC[aw.id] != null) {
-        forcus = _textFC[aw.id];
+        focus = _textFC[aw.id];
       } else {
-        _textFC[aw.id] = forcus;
+        _textFC[aw.id] = focus;
       }
     }
 
@@ -240,7 +253,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         return CustomTextFormField(
           key: tfKey,
           controller: controller,
-          focusNode: forcus,
+          focusNode: focus,
           placeHolder: 'Select one',
           readOnly: true,
           textFieldStyle: CustomTextFormFieldType.normalStyle,
@@ -255,8 +268,59 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               (vl) {
                 controller.text = vl;
                 aw.tmpUserAnswer = vl;
+                Future.delayed(Duration(milliseconds: 50), () {
+                  focus.unfocus();
+                });
               },
-            );
+            ).then((_) {
+              Future.delayed(Duration(milliseconds: 50), () {
+                focus.unfocus();
+              });
+            });
+          },
+        );
+      case AnswerEnum.industrySearchBox:
+        return CustomTextFormField(
+          key: tfKey,
+          controller: controller,
+          focusNode: focus,
+          placeHolder: 'Select one',
+          readOnly: true,
+          keyboardType: TextInputType.multiline,
+          maxLine: null,
+          textFieldStyle: CustomTextFormFieldType.normalStyle,
+          suffixIcon: Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.black,
+          ),
+          onTap: () {
+            var allTmpAnswer = q.allAnswer
+                .where((element) => element.id != aw.id)
+                .map((e) => e.tmpUserAnswer as String)
+                .toList();
+            var _industries = QuestionaireService()
+                .getIndustries()
+                .where((element) => !allTmpAnswer.contains(element))
+                .toList();
+            context
+                .showPopup(
+              child: SearchBoxWidget(
+                _industries,
+                itemSelected: aw.tmpUserAnswer as String,
+                onSelected: (itemSeleted) {
+                  controller.text = itemSeleted;
+                  aw.tmpUserAnswer = itemSeleted;
+                  Future.delayed(Duration(milliseconds: 50), () {
+                    focus.unfocus();
+                  });
+                },
+              ),
+            )
+                .then((_) {
+              Future.delayed(Duration(milliseconds: 50), () {
+                focus.unfocus();
+              });
+            });
           },
         );
       case AnswerEnum.inputType:
@@ -264,7 +328,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         return CustomTextFormField(
           key: tfKey,
           controller: controller,
-          focusNode: forcus,
+          focusNode: focus,
           placeHolder: aw.placeHolder ?? 'Type your answer here',
           textFieldStyle: CustomTextFormFieldType.normalStyle,
           textInputAction: (aw.type == AnswerEnum.multipleInputType)

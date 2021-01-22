@@ -121,7 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Future.delayed(Duration(milliseconds: 100), () {
+      Utils.whiteStatusBar();
+    });
+
     super.initState();
   }
 
@@ -142,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemSelected: MenuEnum.home,
             goBackHandler: () {
               Future.delayed(Duration(milliseconds: 100), () {
-                Utils.authAppStatusBar();
+                Utils.whiteStatusBar();
               });
             },
           ),
@@ -314,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     QuestionaireService().isShowBannerSaved = false;
     _bannerKey.currentState.showBanner(
-      hideInDuration: Duration(seconds: 4),
+      hideInDuration: Duration(seconds: 2),
     );
   }
 

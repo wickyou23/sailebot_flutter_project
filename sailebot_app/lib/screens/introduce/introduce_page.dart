@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sailebot_app/utils/extension.dart';
-import 'package:sailebot_app/utils/utils.dart';
 
 class IntroducePage extends StatelessWidget {
   final String description;
@@ -11,7 +10,7 @@ class IntroducePage extends StatelessWidget {
 
   IntroducePage({
     @required this.image,
-    @required this.description,
+    this.description,
     this.title = 'SaileBot',
     this.wtitle,
     this.wDescription,
@@ -60,7 +59,7 @@ class IntroducePage extends StatelessWidget {
         style: context.theme.appBarTheme.textTheme.headline6.copyWith(
           fontWeight: FontWeight.bold,
           fontSize: 36,
-          color: ColorExt.myBlack,
+          color: ColorExt.colorWithHex(0x080084),
         ),
       );
     }

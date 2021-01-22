@@ -11,7 +11,7 @@ class SaileBotSwipeBuildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Utils.homeStatusBar();
+    Utils.blackStatusBar();
     return Scaffold(
       body: Column(
         children: <Widget>[

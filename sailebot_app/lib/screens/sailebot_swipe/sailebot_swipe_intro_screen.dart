@@ -9,7 +9,7 @@ class SaileBotSwipeIntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var goBackHandler = context.routeArg as Function;
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
 
     return Scaffold(
       body: Container(

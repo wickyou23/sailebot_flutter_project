@@ -4,4 +4,5 @@ enum AnswerEnum {
   inputType,
   multipleInputType,
   picker,
+  industrySearchBox,
 }

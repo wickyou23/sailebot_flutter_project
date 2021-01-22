@@ -17,7 +17,7 @@ class _SaileBotSettingScreenState extends State<SaileBotSettingScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     super.initState();
   }
 

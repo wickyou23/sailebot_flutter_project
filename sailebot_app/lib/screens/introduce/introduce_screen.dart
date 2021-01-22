@@ -77,6 +77,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                               'TM',
                               style: context.theme.textTheme.headline5.copyWith(
                                 fontSize: 11,
+                                color: ColorExt.myBlack,
                               ),
                             ),
                           ),
@@ -93,15 +94,13 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                       ),
                     ),
                   ),
-                  description:
-                      'Build your Sailebot to generate Actionable revenue Opportunities, hands-free.',
                   image: AssetImage("assets/images/intro_bg_1.png"),
                   wtitle: RichText(
                     strutStyle: StrutStyle.fromTextStyle(
                       context.theme.appBarTheme.textTheme.headline6.copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: ColorExt.colorWithHex(0x080084),
                       ),
                     ),
                     text: TextSpan(
@@ -110,7 +109,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                           .copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: ColorExt.colorWithHex(0x080084),
                       ),
                       children: [
                         WidgetSpan(
@@ -121,6 +120,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                                 .copyWith(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
+                              color: ColorExt.colorWithHex(0x080084),
                             ),
                           ),
                         ),
@@ -143,7 +143,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                       context.theme.appBarTheme.textTheme.headline6.copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: ColorExt.colorWithHex(0x080084),
                       ),
                     ),
                     text: TextSpan(
@@ -152,7 +152,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                           .copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: ColorExt.colorWithHex(0x080084),
                       ),
                       children: [
                         WidgetSpan(
@@ -163,6 +163,7 @@ class _IntroduceScreenState extends State<IntroduceScreen> {
                                 .copyWith(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
+                              color: ColorExt.colorWithHex(0x080084),
                             ),
                           ),
                         ),

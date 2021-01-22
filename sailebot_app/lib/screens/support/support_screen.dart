@@ -21,7 +21,7 @@ class _SupportScreenState extends State<SupportScreen> {
 
   @override
   void initState() {
-    Utils.authAppStatusBar();
+    Utils.whiteStatusBar();
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _SupportScreenState extends State<SupportScreen> {
       body: Stack(
         children: <Widget>[
           CustomNavigationBar(
-            backgroundColor: ColorExt.colorWithHex(0x098EF5),
+            bgImage: 'assets/images/bg_default_navigation_bar.png',
             navTitle: 'Contact Support',
           ),
           Container(
